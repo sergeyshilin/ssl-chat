@@ -12,6 +12,9 @@ LIBS 		=	-lthrift
 PCH_NAME 	=	stdafx.h
 STDAFX 		= 	${PCH_NAME}.gch
 
+GEN_SRC		= 	gen-cpp/SSLChatService.cpp  \
+             	gen-cpp/sslchat_types.cpp
+
 # OBJECTS 	= 	${SOURCES:%.cpp=%.o}
 
 CC			=	g++
@@ -20,7 +23,7 @@ CFLAGS		= 	-Wall
 default: server client
 
 server: ${STDAFX} server.cpp
-	${CC} ${CFLAGS} -o server ${GEN_INC} ${INCS_DIRS} server.cpp ${LIBS_DIRS} ${LIBS}
+	${CC} ${CFLAGS} -o server ${GEN_INC} ${INCS_DIRS} server.cpp ${GEN_SRC} ${LIBS_DIRS} ${LIBS}
 
 # src/%.o: src/%.cpp
 # 	${CC} $< ${CFLAGS} -o $@

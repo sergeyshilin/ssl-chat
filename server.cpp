@@ -14,14 +14,14 @@ using namespace sslchat;
 
 class SSLChatHandler : virtual public SSLChatServiceIf {
 private:
-	map<string, string> clients;
+	map<string, SSLChatServiceClient> clients;
 	/**
 	* Send to all clients that user @name joins the chat.
 	* Send user @name that he was successfully joined.
 	*/
 	void sendGreating(const std::string& name) {
-		// string join_great = "You were successfully logged in with name " + name + ".";
-		// string user_join = "User " + name + " joined the conversation";
+		string join_great = "You were successfully logged in with name " + name + ".";
+		string user_join = "User " + name + " joined the conversation";
 		// clients[name].getMessage(join_great);
 		// clients[others].getMessage(user_join);
 	}
@@ -45,7 +45,7 @@ public:
 	}
 
 	/**
-	* Send message to all clients without message.getClient()
+	* Send message to all clients without the message's author
 	*/
 	void send(const Message& message) {
 	}
