@@ -4,13 +4,13 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-#include "test_constants.h"
+#include "sslchat_constants.h"
 
-namespace test {
+namespace sslchat {
 
-const testConstants g_test_constants;
+const sslchatConstants g_sslchat_constants;
 
-testConstants::testConstants() {
+sslchatConstants::sslchatConstants() {
 }
 
 } // namespace

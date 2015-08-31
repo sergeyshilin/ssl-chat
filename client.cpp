@@ -24,12 +24,18 @@ int main(int argc, char const *argv[]) {
 
 	    cout << "Hi, we're glad to see you! \n Please enter your unique name to get an access and \n be able to send and receive messages from other users" << endl;
 
-		cin >> name;
+	    do
+	    {
+			cin >> name;
+			bool auth = client.authorize(name);
+			if(!auth)
+				cout << "This name is in use yet. Please try another one" << endl;
+	    } while (!auth);			
 
-	    client.ping();
-	    cout << "ping()" << endl;
+	    // client.ping();
+	    // cout << "ping()" << endl;
 
-	    cout << "1 + 1 = " << client.add(1, 1) << endl;
+	    // cout << "1 + 1 = " << client.add(1, 1) << endl;
 
 	    transport->close();
 	  } catch (TException& tx) {
