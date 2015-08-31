@@ -36,9 +36,9 @@ class SSLChatServiceHandler : virtual public SSLChatServiceIf {
   /**
    * Out message to client
    * 
-   * @param msg
+   * @param name
    */
-  void getMessage(std::string& _return, const std::string& msg) {
+  void getMessage(Message& _return, const std::string& name) {
     // Your implementation goes here
     printf("getMessage\n");
   }
@@ -56,9 +56,9 @@ class SSLChatServiceHandler : virtual public SSLChatServiceIf {
   /**
    * Send message to all clients without message.getClient()
    * 
-   * @param message
+   * @param msg
    */
-  void send(const Message& message) {
+  void send(const Message& msg) {
     // Your implementation goes here
     printf("send\n");
   }

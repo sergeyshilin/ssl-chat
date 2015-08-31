@@ -23,7 +23,7 @@ service SSLChatService {
 	/**
 	* Out message to client
 	*/
-	string getMessage(1:string msg),
+	Message getMessage(1:string name),
 
 	/**
 	* Check if name is in map
@@ -33,6 +33,6 @@ service SSLChatService {
 	/**
 	* Send message to all clients without message.getClient()
 	*/
-	void send(1:Message message)
+	void send(1:Message msg)
 
 }

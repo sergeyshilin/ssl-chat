@@ -33,9 +33,9 @@ class SSLChatServiceIf {
   /**
    * Out message to client
    * 
-   * @param msg
+   * @param name
    */
-  virtual void getMessage(std::string& _return, const std::string& msg) = 0;
+  virtual void getMessage(Message& _return, const std::string& name) = 0;
 
   /**
    * Check if name is in map
@@ -47,9 +47,9 @@ class SSLChatServiceIf {
   /**
    * Send message to all clients without message.getClient()
    * 
-   * @param message
+   * @param msg
    */
-  virtual void send(const Message& message) = 0;
+  virtual void send(const Message& msg) = 0;
 };
 
 class SSLChatServiceIfFactory {
@@ -82,14 +82,14 @@ class SSLChatServiceNull : virtual public SSLChatServiceIf {
   void sendGreating(const std::string& /* name */) {
     return;
   }
-  void getMessage(std::string& /* _return */, const std::string& /* msg */) {
+  void getMessage(Message& /* _return */, const std::string& /* name */) {
     return;
   }
   bool authorize(const std::string& /* name */) {
     bool _return = false;
     return _return;
   }
-  void send(const Message& /* message */) {
+  void send(const Message& /* msg */) {
     return;
   }
 };
@@ -189,8 +189,8 @@ class SSLChatService_sendGreating_presult {
 };
 
 typedef struct _SSLChatService_getMessage_args__isset {
-  _SSLChatService_getMessage_args__isset() : msg(false) {}
-  bool msg :1;
+  _SSLChatService_getMessage_args__isset() : name(false) {}
+  bool name :1;
 } _SSLChatService_getMessage_args__isset;
 
 class SSLChatService_getMessage_args {
@@ -198,19 +198,19 @@ class SSLChatService_getMessage_args {
 
   SSLChatService_getMessage_args(const SSLChatService_getMessage_args&);
   SSLChatService_getMessage_args& operator=(const SSLChatService_getMessage_args&);
-  SSLChatService_getMessage_args() : msg() {
+  SSLChatService_getMessage_args() : name() {
   }
 
   virtual ~SSLChatService_getMessage_args() throw();
-  std::string msg;
+  std::string name;
 
   _SSLChatService_getMessage_args__isset __isset;
 
-  void __set_msg(const std::string& val);
+  void __set_name(const std::string& val);
 
   bool operator == (const SSLChatService_getMessage_args & rhs) const
   {
-    if (!(msg == rhs.msg))
+    if (!(name == rhs.name))
       return false;
     return true;
   }
@@ -233,7 +233,7 @@ class SSLChatService_getMessage_pargs {
 
 
   virtual ~SSLChatService_getMessage_pargs() throw();
-  const std::string* msg;
+  const std::string* name;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
@@ -251,15 +251,15 @@ class SSLChatService_getMessage_result {
 
   SSLChatService_getMessage_result(const SSLChatService_getMessage_result&);
   SSLChatService_getMessage_result& operator=(const SSLChatService_getMessage_result&);
-  SSLChatService_getMessage_result() : success() {
+  SSLChatService_getMessage_result() {
   }
 
   virtual ~SSLChatService_getMessage_result() throw();
-  std::string success;
+  Message success;
 
   _SSLChatService_getMessage_result__isset __isset;
 
-  void __set_success(const std::string& val);
+  void __set_success(const Message& val);
 
   bool operator == (const SSLChatService_getMessage_result & rhs) const
   {
@@ -290,7 +290,7 @@ class SSLChatService_getMessage_presult {
 
 
   virtual ~SSLChatService_getMessage_presult() throw();
-  std::string* success;
+  Message* success;
 
   _SSLChatService_getMessage_presult__isset __isset;
 
@@ -413,8 +413,8 @@ class SSLChatService_authorize_presult {
 };
 
 typedef struct _SSLChatService_send_args__isset {
-  _SSLChatService_send_args__isset() : message(false) {}
-  bool message :1;
+  _SSLChatService_send_args__isset() : msg(false) {}
+  bool msg :1;
 } _SSLChatService_send_args__isset;
 
 class SSLChatService_send_args {
@@ -426,15 +426,15 @@ class SSLChatService_send_args {
   }
 
   virtual ~SSLChatService_send_args() throw();
-  Message message;
+  Message msg;
 
   _SSLChatService_send_args__isset __isset;
 
-  void __set_message(const Message& val);
+  void __set_msg(const Message& val);
 
   bool operator == (const SSLChatService_send_args & rhs) const
   {
-    if (!(message == rhs.message))
+    if (!(msg == rhs.msg))
       return false;
     return true;
   }
@@ -457,7 +457,7 @@ class SSLChatService_send_pargs {
 
 
   virtual ~SSLChatService_send_pargs() throw();
-  const Message* message;
+  const Message* msg;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
@@ -534,14 +534,14 @@ class SSLChatServiceClient : virtual public SSLChatServiceIf {
   void sendGreating(const std::string& name);
   void send_sendGreating(const std::string& name);
   void recv_sendGreating();
-  void getMessage(std::string& _return, const std::string& msg);
-  void send_getMessage(const std::string& msg);
-  void recv_getMessage(std::string& _return);
+  void getMessage(Message& _return, const std::string& name);
+  void send_getMessage(const std::string& name);
+  void recv_getMessage(Message& _return);
   bool authorize(const std::string& name);
   void send_authorize(const std::string& name);
   bool recv_authorize();
-  void send(const Message& message);
-  void send_send(const Message& message);
+  void send(const Message& msg);
+  void send_send(const Message& msg);
   void recv_send();
  protected:
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> piprot_;
@@ -606,13 +606,13 @@ class SSLChatServiceMultiface : virtual public SSLChatServiceIf {
     ifaces_[i]->sendGreating(name);
   }
 
-  void getMessage(std::string& _return, const std::string& msg) {
+  void getMessage(Message& _return, const std::string& name) {
     size_t sz = ifaces_.size();
     size_t i = 0;
     for (; i < (sz - 1); ++i) {
-      ifaces_[i]->getMessage(_return, msg);
+      ifaces_[i]->getMessage(_return, name);
     }
-    ifaces_[i]->getMessage(_return, msg);
+    ifaces_[i]->getMessage(_return, name);
     return;
   }
 
@@ -625,13 +625,13 @@ class SSLChatServiceMultiface : virtual public SSLChatServiceIf {
     return ifaces_[i]->authorize(name);
   }
 
-  void send(const Message& message) {
+  void send(const Message& msg) {
     size_t sz = ifaces_.size();
     size_t i = 0;
     for (; i < (sz - 1); ++i) {
-      ifaces_[i]->send(message);
+      ifaces_[i]->send(msg);
     }
-    ifaces_[i]->send(message);
+    ifaces_[i]->send(msg);
   }
 
 };
@@ -667,14 +667,14 @@ class SSLChatServiceConcurrentClient : virtual public SSLChatServiceIf {
   void sendGreating(const std::string& name);
   int32_t send_sendGreating(const std::string& name);
   void recv_sendGreating(const int32_t seqid);
-  void getMessage(std::string& _return, const std::string& msg);
-  int32_t send_getMessage(const std::string& msg);
-  void recv_getMessage(std::string& _return, const int32_t seqid);
+  void getMessage(Message& _return, const std::string& name);
+  int32_t send_getMessage(const std::string& name);
+  void recv_getMessage(Message& _return, const int32_t seqid);
   bool authorize(const std::string& name);
   int32_t send_authorize(const std::string& name);
   bool recv_authorize(const int32_t seqid);
-  void send(const Message& message);
-  int32_t send_send(const Message& message);
+  void send(const Message& msg);
+  int32_t send_send(const Message& msg);
   void recv_send(const int32_t seqid);
  protected:
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> piprot_;

@@ -192,8 +192,8 @@ uint32_t SSLChatService_getMessage_args::read(::apache::thrift::protocol::TProto
     {
       case 1:
         if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->msg);
-          this->__isset.msg = true;
+          xfer += iprot->readString(this->name);
+          this->__isset.name = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -215,8 +215,8 @@ uint32_t SSLChatService_getMessage_args::write(::apache::thrift::protocol::TProt
   apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
   xfer += oprot->writeStructBegin("SSLChatService_getMessage_args");
 
-  xfer += oprot->writeFieldBegin("msg", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString(this->msg);
+  xfer += oprot->writeFieldBegin("name", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString(this->name);
   xfer += oprot->writeFieldEnd();
 
   xfer += oprot->writeFieldStop();
@@ -234,8 +234,8 @@ uint32_t SSLChatService_getMessage_pargs::write(::apache::thrift::protocol::TPro
   apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
   xfer += oprot->writeStructBegin("SSLChatService_getMessage_pargs");
 
-  xfer += oprot->writeFieldBegin("msg", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString((*(this->msg)));
+  xfer += oprot->writeFieldBegin("name", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString((*(this->name)));
   xfer += oprot->writeFieldEnd();
 
   xfer += oprot->writeFieldStop();
@@ -270,8 +270,8 @@ uint32_t SSLChatService_getMessage_result::read(::apache::thrift::protocol::TPro
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->success);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -296,8 +296,8 @@ uint32_t SSLChatService_getMessage_result::write(::apache::thrift::protocol::TPr
   xfer += oprot->writeStructBegin("SSLChatService_getMessage_result");
 
   if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRING, 0);
-    xfer += oprot->writeString(this->success);
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
     xfer += oprot->writeFieldEnd();
   }
   xfer += oprot->writeFieldStop();
@@ -332,8 +332,8 @@ uint32_t SSLChatService_getMessage_presult::read(::apache::thrift::protocol::TPr
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString((*(this->success)));
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -566,8 +566,8 @@ uint32_t SSLChatService_send_args::read(::apache::thrift::protocol::TProtocol* i
     {
       case 1:
         if (ftype == ::apache::thrift::protocol::T_STRUCT) {
-          xfer += this->message.read(iprot);
-          this->__isset.message = true;
+          xfer += this->msg.read(iprot);
+          this->__isset.msg = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -589,8 +589,8 @@ uint32_t SSLChatService_send_args::write(::apache::thrift::protocol::TProtocol* 
   apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
   xfer += oprot->writeStructBegin("SSLChatService_send_args");
 
-  xfer += oprot->writeFieldBegin("message", ::apache::thrift::protocol::T_STRUCT, 1);
-  xfer += this->message.write(oprot);
+  xfer += oprot->writeFieldBegin("msg", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->msg.write(oprot);
   xfer += oprot->writeFieldEnd();
 
   xfer += oprot->writeFieldStop();
@@ -608,8 +608,8 @@ uint32_t SSLChatService_send_pargs::write(::apache::thrift::protocol::TProtocol*
   apache::thrift::protocol::TOutputRecursionTracker tracker(*oprot);
   xfer += oprot->writeStructBegin("SSLChatService_send_pargs");
 
-  xfer += oprot->writeFieldBegin("message", ::apache::thrift::protocol::T_STRUCT, 1);
-  xfer += (*(this->message)).write(oprot);
+  xfer += oprot->writeFieldBegin("msg", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->msg)).write(oprot);
   xfer += oprot->writeFieldEnd();
 
   xfer += oprot->writeFieldStop();
@@ -747,19 +747,19 @@ void SSLChatServiceClient::recv_sendGreating()
   return;
 }
 
-void SSLChatServiceClient::getMessage(std::string& _return, const std::string& msg)
+void SSLChatServiceClient::getMessage(Message& _return, const std::string& name)
 {
-  send_getMessage(msg);
+  send_getMessage(name);
   recv_getMessage(_return);
 }
 
-void SSLChatServiceClient::send_getMessage(const std::string& msg)
+void SSLChatServiceClient::send_getMessage(const std::string& name)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("getMessage", ::apache::thrift::protocol::T_CALL, cseqid);
 
   SSLChatService_getMessage_pargs args;
-  args.msg = &msg;
+  args.name = &name;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -767,7 +767,7 @@ void SSLChatServiceClient::send_getMessage(const std::string& msg)
   oprot_->getTransport()->flush();
 }
 
-void SSLChatServiceClient::recv_getMessage(std::string& _return)
+void SSLChatServiceClient::recv_getMessage(Message& _return)
 {
 
   int32_t rseqid = 0;
@@ -863,19 +863,19 @@ bool SSLChatServiceClient::recv_authorize()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "authorize failed: unknown result");
 }
 
-void SSLChatServiceClient::send(const Message& message)
+void SSLChatServiceClient::send(const Message& msg)
 {
-  send_send(message);
+  send_send(msg);
   recv_send();
 }
 
-void SSLChatServiceClient::send_send(const Message& message)
+void SSLChatServiceClient::send_send(const Message& msg)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("send", ::apache::thrift::protocol::T_CALL, cseqid);
 
   SSLChatService_send_pargs args;
-  args.message = &message;
+  args.msg = &msg;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -1011,7 +1011,7 @@ void SSLChatServiceProcessor::process_getMessage(int32_t seqid, ::apache::thrift
 
   SSLChatService_getMessage_result result;
   try {
-    iface_->getMessage(result.success, args.msg);
+    iface_->getMessage(result.success, args.name);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != NULL) {
@@ -1119,7 +1119,7 @@ void SSLChatServiceProcessor::process_send(int32_t seqid, ::apache::thrift::prot
 
   SSLChatService_send_result result;
   try {
-    iface_->send(args.message);
+    iface_->send(args.msg);
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != NULL) {
       this->eventHandler_->handlerError(ctx, "SSLChatService.send");
@@ -1234,20 +1234,20 @@ void SSLChatServiceConcurrentClient::recv_sendGreating(const int32_t seqid)
   } // end while(true)
 }
 
-void SSLChatServiceConcurrentClient::getMessage(std::string& _return, const std::string& msg)
+void SSLChatServiceConcurrentClient::getMessage(Message& _return, const std::string& name)
 {
-  int32_t seqid = send_getMessage(msg);
+  int32_t seqid = send_getMessage(name);
   recv_getMessage(_return, seqid);
 }
 
-int32_t SSLChatServiceConcurrentClient::send_getMessage(const std::string& msg)
+int32_t SSLChatServiceConcurrentClient::send_getMessage(const std::string& name)
 {
   int32_t cseqid = this->sync_.generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(&this->sync_);
   oprot_->writeMessageBegin("getMessage", ::apache::thrift::protocol::T_CALL, cseqid);
 
   SSLChatService_getMessage_pargs args;
-  args.msg = &msg;
+  args.name = &name;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -1258,7 +1258,7 @@ int32_t SSLChatServiceConcurrentClient::send_getMessage(const std::string& msg)
   return cseqid;
 }
 
-void SSLChatServiceConcurrentClient::recv_getMessage(std::string& _return, const int32_t seqid)
+void SSLChatServiceConcurrentClient::recv_getMessage(Message& _return, const int32_t seqid)
 {
 
   int32_t rseqid = 0;
@@ -1402,20 +1402,20 @@ bool SSLChatServiceConcurrentClient::recv_authorize(const int32_t seqid)
   } // end while(true)
 }
 
-void SSLChatServiceConcurrentClient::send(const Message& message)
+void SSLChatServiceConcurrentClient::send(const Message& msg)
 {
-  int32_t seqid = send_send(message);
+  int32_t seqid = send_send(msg);
   recv_send(seqid);
 }
 
-int32_t SSLChatServiceConcurrentClient::send_send(const Message& message)
+int32_t SSLChatServiceConcurrentClient::send_send(const Message& msg)
 {
   int32_t cseqid = this->sync_.generateSeqId();
   ::apache::thrift::async::TConcurrentSendSentry sentry(&this->sync_);
   oprot_->writeMessageBegin("send", ::apache::thrift::protocol::T_CALL, cseqid);
 
   SSLChatService_send_pargs args;
-  args.message = &message;
+  args.msg = &msg;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();

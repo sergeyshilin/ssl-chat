@@ -5,7 +5,7 @@ BOOST_LIBS 	= 	/usr/lib/x86_64-linux-gnu
 GEN_INC 	= 	-I./gen-cpp
 INCS_DIRS 	=	-I${BOOST_DIR} -I${THRIFT_DIR}
 LIBS_DIRS   =	-L${BOOST_LIBS} -L${THRIFT_LIBS}
-LIBS 		=	-lthrift
+LIBS 		=	-lthrift -lthriftnb -levent -lboost_system
 
 # SOURCES 	= 	src/multiply.cpp
 
@@ -18,7 +18,7 @@ GEN_SRC		= 	gen-cpp/SSLChatService.cpp  \
 # OBJECTS 	= 	${SOURCES:%.cpp=%.o}
 
 CC			=	g++
-CFLAGS		= 	-Wall
+CFLAGS		= 	-std=c++11 -Wall
 
 default: server client
 
@@ -29,7 +29,7 @@ server: ${STDAFX} server.cpp
 # 	${CC} $< ${CFLAGS} -o $@
 
 client: ${STDAFX} client.cpp
-	${CC} ${CFLAGS} -o client ${GEN_INC} ${INCS_DIRS} client.cpp ${LIBS_DIRS} ${LIBS}
+	${CC} ${CFLAGS} -o client ${GEN_INC} ${INCS_DIRS} client.cpp ${GEN_SRC} ${LIBS_DIRS} ${LIBS}
 
 ${STDAFX}:
 	${CC} ${CFLAGS} -x c++-header ${PCH_NAME}
