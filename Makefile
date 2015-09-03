@@ -8,7 +8,7 @@ BOOST_LIBS 	= 	/usr/lib/x86_64-linux-gnu
 GEN_INC 	= 	-I./gen-cpp
 INCS_DIRS 	=	-I${BOOST_DIR} -I${THRIFT_DIR} -I${LOG4CXX_DIR}
 LIBS_DIRS   =	-L${BOOST_LIBS} -L${THRIFT_LIBS}
-LIBS 		=	-lthrift -lthriftnb -levent -lboost_system -llog4cxx
+LIBS 		=	-lthrift -lthriftnb -levent -lboost_system -llog4cxx -lssl -lcrypto
 
 # SOURCES 	= 	src/multiply.cpp
 

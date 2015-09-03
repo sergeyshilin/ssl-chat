@@ -3,6 +3,8 @@
 #include "gen-cpp/SSLChatService.h"
 
 #define MSG_SLEEP_TIME 300
+#define HOST "localhost"
+#define PORT 9090
 
 
 using namespace std;
@@ -46,10 +48,24 @@ public:
 	}
 };
 
+boost::shared_ptr<TSSLSocketFactory> getSSLSocketFactory() {
+	boost::shared_ptr<TSSLSocketFactory> factory(new TSSLSocketFactory());
+	factory->loadPrivateKey("/home/snape/programming/cpp/ssl-chat/ssl/client-key.pem");
+	// factory->loadCertificate("ssl/client-cert.pem");
+	factory->authenticate(true);
+	factory->loadTrustedCertificates("/home/snape/programming/cpp/ssl-chat/ssl/server-cert.pem");
+    factory->ciphers("ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH");
+
+    return factory;
+}
+
 int main(int argc, char const *argv[]) {
 
-	boost::shared_ptr<TTransport> socket(new TSocket("localhost", 9090));
-	boost::shared_ptr<TTransport> transport(new TFramedTransport(socket));
+	signal(SIGPIPE, SIG_IGN); 
+
+	boost::shared_ptr<TSSLSocketFactory> factory = getSSLSocketFactory();
+	boost::shared_ptr<TSSLSocket> socket = factory->createSocket(HOST, PORT);
+	boost::shared_ptr<TBufferedTransport> transport(new TBufferedTransport(socket));
 	boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
 	SSLChatServiceClient client(protocol);
 

@@ -6,6 +6,8 @@
 #include <thrift/server/TThreadPoolServer.h>
 #include <thrift/server/TThreadedServer.h>
 #include <thrift/transport/TServerSocket.h>
+#include <thrift/transport/TSSLServerSocket.h>
+#include <thrift/transport/TSSLSocket.h>
 #include <thrift/transport/TTransportUtils.h>
 #include <thrift/transport/TSocket.h>
 #include <thrift/TToString.h>
