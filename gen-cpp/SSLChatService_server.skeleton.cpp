@@ -23,17 +23,6 @@ class SSLChatServiceHandler : virtual public SSLChatServiceIf {
   }
 
   /**
-   * Send to all clients that user @name joins the chat.
-   * Send user @name that he was successfully joined.
-   * 
-   * @param name
-   */
-  void sendGreating(const std::string& name) {
-    // Your implementation goes here
-    printf("sendGreating\n");
-  }
-
-  /**
    * Out message to client
    * 
    * @param name

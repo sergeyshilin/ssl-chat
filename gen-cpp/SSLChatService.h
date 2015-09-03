@@ -23,14 +23,6 @@ class SSLChatServiceIf {
   virtual ~SSLChatServiceIf() {}
 
   /**
-   * Send to all clients that user @name joins the chat.
-   * Send user @name that he was successfully joined.
-   * 
-   * @param name
-   */
-  virtual void sendGreating(const std::string& name) = 0;
-
-  /**
    * Out message to client
    * 
    * @param name
@@ -79,9 +71,6 @@ class SSLChatServiceIfSingletonFactory : virtual public SSLChatServiceIfFactory 
 class SSLChatServiceNull : virtual public SSLChatServiceIf {
  public:
   virtual ~SSLChatServiceNull() {}
-  void sendGreating(const std::string& /* name */) {
-    return;
-  }
   void getMessage(Message& /* _return */, const std::string& /* name */) {
     return;
   }
@@ -92,100 +81,6 @@ class SSLChatServiceNull : virtual public SSLChatServiceIf {
   void send(const Message& /* msg */) {
     return;
   }
-};
-
-typedef struct _SSLChatService_sendGreating_args__isset {
-  _SSLChatService_sendGreating_args__isset() : name(false) {}
-  bool name :1;
-} _SSLChatService_sendGreating_args__isset;
-
-class SSLChatService_sendGreating_args {
- public:
-
-  SSLChatService_sendGreating_args(const SSLChatService_sendGreating_args&);
-  SSLChatService_sendGreating_args& operator=(const SSLChatService_sendGreating_args&);
-  SSLChatService_sendGreating_args() : name() {
-  }
-
-  virtual ~SSLChatService_sendGreating_args() throw();
-  std::string name;
-
-  _SSLChatService_sendGreating_args__isset __isset;
-
-  void __set_name(const std::string& val);
-
-  bool operator == (const SSLChatService_sendGreating_args & rhs) const
-  {
-    if (!(name == rhs.name))
-      return false;
-    return true;
-  }
-  bool operator != (const SSLChatService_sendGreating_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const SSLChatService_sendGreating_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-  friend std::ostream& operator<<(std::ostream& out, const SSLChatService_sendGreating_args& obj);
-
-};
-
-
-class SSLChatService_sendGreating_pargs {
- public:
-
-
-  virtual ~SSLChatService_sendGreating_pargs() throw();
-  const std::string* name;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-  friend std::ostream& operator<<(std::ostream& out, const SSLChatService_sendGreating_pargs& obj);
-
-};
-
-
-class SSLChatService_sendGreating_result {
- public:
-
-  SSLChatService_sendGreating_result(const SSLChatService_sendGreating_result&);
-  SSLChatService_sendGreating_result& operator=(const SSLChatService_sendGreating_result&);
-  SSLChatService_sendGreating_result() {
-  }
-
-  virtual ~SSLChatService_sendGreating_result() throw();
-
-  bool operator == (const SSLChatService_sendGreating_result & /* rhs */) const
-  {
-    return true;
-  }
-  bool operator != (const SSLChatService_sendGreating_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const SSLChatService_sendGreating_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-  friend std::ostream& operator<<(std::ostream& out, const SSLChatService_sendGreating_result& obj);
-
-};
-
-
-class SSLChatService_sendGreating_presult {
- public:
-
-
-  virtual ~SSLChatService_sendGreating_presult() throw();
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-  friend std::ostream& operator<<(std::ostream& out, const SSLChatService_sendGreating_presult& obj);
-
 };
 
 typedef struct _SSLChatService_getMessage_args__isset {
@@ -531,9 +426,6 @@ class SSLChatServiceClient : virtual public SSLChatServiceIf {
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> getOutputProtocol() {
     return poprot_;
   }
-  void sendGreating(const std::string& name);
-  void send_sendGreating(const std::string& name);
-  void recv_sendGreating();
   void getMessage(Message& _return, const std::string& name);
   void send_getMessage(const std::string& name);
   void recv_getMessage(Message& _return);
@@ -558,14 +450,12 @@ class SSLChatServiceProcessor : public ::apache::thrift::TDispatchProcessor {
   typedef  void (SSLChatServiceProcessor::*ProcessFunction)(int32_t, ::apache::thrift::protocol::TProtocol*, ::apache::thrift::protocol::TProtocol*, void*);
   typedef std::map<std::string, ProcessFunction> ProcessMap;
   ProcessMap processMap_;
-  void process_sendGreating(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_getMessage(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_authorize(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_send(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
  public:
   SSLChatServiceProcessor(boost::shared_ptr<SSLChatServiceIf> iface) :
     iface_(iface) {
-    processMap_["sendGreating"] = &SSLChatServiceProcessor::process_sendGreating;
     processMap_["getMessage"] = &SSLChatServiceProcessor::process_getMessage;
     processMap_["authorize"] = &SSLChatServiceProcessor::process_authorize;
     processMap_["send"] = &SSLChatServiceProcessor::process_send;
@@ -597,15 +487,6 @@ class SSLChatServiceMultiface : virtual public SSLChatServiceIf {
     ifaces_.push_back(iface);
   }
  public:
-  void sendGreating(const std::string& name) {
-    size_t sz = ifaces_.size();
-    size_t i = 0;
-    for (; i < (sz - 1); ++i) {
-      ifaces_[i]->sendGreating(name);
-    }
-    ifaces_[i]->sendGreating(name);
-  }
-
   void getMessage(Message& _return, const std::string& name) {
     size_t sz = ifaces_.size();
     size_t i = 0;
@@ -664,9 +545,6 @@ class SSLChatServiceConcurrentClient : virtual public SSLChatServiceIf {
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> getOutputProtocol() {
     return poprot_;
   }
-  void sendGreating(const std::string& name);
-  int32_t send_sendGreating(const std::string& name);
-  void recv_sendGreating(const int32_t seqid);
   void getMessage(Message& _return, const std::string& name);
   int32_t send_getMessage(const std::string& name);
   void recv_getMessage(Message& _return, const int32_t seqid);

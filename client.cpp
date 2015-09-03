@@ -2,7 +2,7 @@
 
 #include "gen-cpp/SSLChatService.h"
 
-#define MSG_SLEEP_TIME 100
+#define MSG_SLEEP_TIME 300
 
 
 using namespace std;
@@ -14,21 +14,35 @@ using namespace sslchat;
 
 class IOService {
 public:
-	static void read(SSLChatServiceClient client, string name) {
+	static bool EXIT_TRIGGER;
+
+	static void read(SSLChatServiceClient client, string name, bool * exit) {
 		while(true) {
+
 			Message msg;
 			client.getMessage(msg, name);
-			if(msg.message.compare("EOF") != 0 && msg.name.compare("Server") != 0)
+			if(msg.message.compare("EOF") != 0)
 	    		cout << msg.name << ":: " << msg.message << endl;
 	    	std::this_thread::sleep_for(std::chrono::milliseconds(MSG_SLEEP_TIME));
+
+	    	if(*exit)
+				return;
 	    }
 	}
 
-	static void write() {
+	static void write(SSLChatServiceClient client, string name, bool * exit) {
 		string input;
 		do {
-			cin >> input;
+			getline(std::cin, input);
+
+			Message send;
+			send.name = name;
+			send.message = input;
+			client.send(send);
 		} while (input.compare("exit") != 0);
+
+		*exit = !*exit;
+		return;
 	}
 };
 
@@ -52,14 +66,16 @@ int main(int argc, char const *argv[]) {
 			getline(std::cin, name);
 			auth = client.authorize(name);
 			if(!auth)
-				cout << "This name is in use yet. Please try another one" << endl;
-	    } while (!auth);			
+				cout << "This name is in use yet. Please try another one." << endl;
+	    } while (!auth);	
 
-	   std::thread t1(IOService::read, client, name);
-	   t1.join();
-	   IOService::write();
+	    bool EXIT_TRIGGER = false;
 
-	   t1.detach();
+		std::thread t1(IOService::read, client, name, &EXIT_TRIGGER);
+		std::thread t2(IOService::write, client, name, &EXIT_TRIGGER);
+
+		t1.join();
+		t2.join();
 
     	transport->close();
 	} catch (TException& tx) {

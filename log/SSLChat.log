@@ -1,0 +1,17 @@
+INFO - Starting server...
+INFO - User snape joined the conversation.
+INFO - Got message from snape
+INFO - Got message from snape
+INFO - Got message from snape
+INFO - User snape left out the conversation.
+2015-09-03 12:18:40 INFO  SSLChat null - Starting server...
+2015-09-03 12:18:45 INFO  SSLChat null - User snape joined the conversation.
+2015-09-03 12:18:47 INFO  SSLChat null - Got message from snape
+2015-09-03 12:18:49 INFO  SSLChat null - Got message from snape
+2015-09-03 12:18:50 INFO  SSLChat null - Got message from snape
+2015-09-03 12:18:50 INFO  SSLChat null - User snape left out the conversation.
+2015-09-03 12:21:00 INFO  SSLChat - Starting server...
+2015-09-03 12:21:04 INFO  SSLChat - User snape joined the conversation.
+2015-09-03 12:21:07 INFO  SSLChat - Got message from snape
+2015-09-03 12:21:08 INFO  SSLChat - Got message from snape
+2015-09-03 12:21:08 INFO  SSLChat - User snape left out the conversation.

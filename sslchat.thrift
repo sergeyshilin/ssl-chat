@@ -13,12 +13,6 @@ service SSLChatService {
    * lists and exception lists are specified using the exact same syntax as
    * field lists in struct or exception definitions.
    */
-	
-	/**
-	* Send to all clients that user @name joins the chat.
-	* Send user @name that he was successfully joined.
-	*/
-	void sendGreating(1:string name),
 
 	/**
 	* Out message to client

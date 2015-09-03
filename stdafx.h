@@ -15,6 +15,14 @@
 #include <boost/thread/condition.hpp>
 #include <boost/thread/locks.hpp>
 
+#include <log4cxx/logger.h>
+#include <log4cxx/helpers/pool.h>
+#include <log4cxx/basicconfigurator.h>
+#include <log4cxx/propertyconfigurator.h>
+#include <log4cxx/helpers/exception.h>
+#include <log4cxx/fileappender.h>
+#include <log4cxx/simplelayout.h>
+
 #include <iostream>
 #include <stdexcept>
 #include <sstream>

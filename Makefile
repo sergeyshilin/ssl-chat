@@ -1,11 +1,14 @@
 THRIFT_DIR	= 	/usr/lib/thrift/lib/cpp/test
 BOOST_DIR	= 	/usr/include/boost
+LOG4CXX_DIR	= 	/usr/lib/apache-log4cxx-0.10.0/src/main/include
+#Thrift and log4cxx libs in
+# /usr/local/lib
 THRIFT_LIBS	= 	/usr/local/lib
 BOOST_LIBS 	= 	/usr/lib/x86_64-linux-gnu	
 GEN_INC 	= 	-I./gen-cpp
-INCS_DIRS 	=	-I${BOOST_DIR} -I${THRIFT_DIR}
+INCS_DIRS 	=	-I${BOOST_DIR} -I${THRIFT_DIR} -I${LOG4CXX_DIR}
 LIBS_DIRS   =	-L${BOOST_LIBS} -L${THRIFT_LIBS}
-LIBS 		=	-lthrift -lthriftnb -levent -lboost_system
+LIBS 		=	-lthrift -lthriftnb -levent -lboost_system -llog4cxx
 
 # SOURCES 	= 	src/multiply.cpp
 

@@ -4,6 +4,78 @@
 		"selected_items":
 		[
 			[
+				"messa",
+				"messages"
+			],
+			[
+				"co",
+				"compare"
+			],
+			[
+				"serv",
+				"server_msg"
+			],
+			[
+				"mess",
+				"message"
+			],
+			[
+				"send",
+				"sendGreating"
+			],
+			[
+				"clien",
+				"client_messages"
+			],
+			[
+				"Mess",
+				"Message"
+			],
+			[
+				"SSLC",
+				"SSLChatService"
+			],
+			[
+				"GE",
+				"GEN_SRC"
+			],
+			[
+				"SSl",
+				"SSLChatServiceIf"
+			],
+			[
+				"join",
+				"join_great"
+			],
+			[
+				"au",
+				"auth"
+			],
+			[
+				"a",
+				"authorize"
+			],
+			[
+				"Mul",
+				"MultiplicationService"
+			],
+			[
+				"int",
+				"int32_t"
+			],
+			[
+				"Mu",
+				"MultiplicationHandler"
+			],
+			[
+				"BO",
+				"BOOST_LIBS"
+			],
+			[
+				"THR",
+				"THRIFT_LIBS"
+			],
+			[
 				"arg",
 				"argv	char const *[]"
 			]
@@ -12,18 +84,26 @@
 	"buffers":
 	[
 		{
-			"file": "sslchat.sublime-project",
+			"file": "server.cpp",
 			"settings":
 			{
-				"buffer_size": 926,
+				"buffer_size": 3335,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "server.cpp",
+			"file": "stdafx.h",
 			"settings":
 			{
-				"buffer_size": 129,
+				"buffer_size": 784,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "client.cpp",
+			"settings":
+			{
+				"buffer_size": 1691,
 				"line_ending": "Unix"
 			}
 		}
@@ -88,15 +168,25 @@
 	},
 	"file_history":
 	[
-		"/home/snape/.config/sublime-text-2/Packages/User/SublimeClang.sublime-settings",
+		"/home/snape/programming/cpp/ssl-chat/gen-cpp/SSLChatService_server.skeleton.cpp",
+		"/home/snape/programming/cpp/ssl-chat/Makefile",
+		"/home/snape/programming/cpp/ssl-chat/sslchat.thrift",
+		"/home/snape/programming/cpp/ssl-chat/stdafx.h",
+		"/usr/lib/thrift/tutorial/cpp/gen-cpp/SharedService_server.skeleton.cpp",
+		"/usr/lib/thrift/test/cpp/src/StressTestNonBlocking.cpp",
+		"/usr/lib/thrift/lib/cpp/test/TNonblockingServerTest.cpp",
 		"/home/snape/programming/cpp/ssl-chat/server.cpp",
+		"/home/snape/programming/cpp/ssl-chat/client.cpp",
+		"/home/snape/programming/cpp/ssl-chat/test.thrift",
+		"/home/snape/programming/cpp/ssl-chat/src/multiply.h",
+		"/home/snape/programming/cpp/ssl-chat/src/multiply.cpp",
+		"/home/snape/programming/cpp/ssl-chat/stdafx.h.gch",
+		"/home/snape/programming/cpp/ssl-chat/sslchat.sublime-project",
+		"/home/snape/.config/sublime-text-2/Packages/User/SublimeClang.sublime-settings",
 		"/home/snape/.config/sublime-text-2/Packages/SublimeClang/SublimeClang.sublime-settings",
 		"/home/snape/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
 		"/home/snape/programming/cpp/ssl-chat/server.plist",
-		"/home/snape/programming/cpp/ssl-chat/sslchat.sublime-project",
-		"/home/snape/programming/cpp/ssl-chat/Makefile",
 		"/home/snape/programming/cpp/ssl-chat/main.cpp",
-		"/home/snape/programming/cpp/ssl-chat/test.thrift",
 		"/home/snape/programming/cpp/ssl-chat/main",
 		"/home/snape/.config/sublime-text-2/Packages/User/Package Control.sublime-settings",
 		"/home/snape/.config/sublime-text-2/Packages/Package Control/Package Control.sublime-settings"
@@ -117,6 +207,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"lock",
+			"boost",
+			"getMes",
+			"Client",
 			"clang",
 			"clang++",
 			"clang",
@@ -140,51 +234,50 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "sslchat.sublime-project",
+					"file": "server.cpp",
 					"settings":
 					{
-						"buffer_size": 926,
+						"buffer_size": 3335,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								505,
-								505
+								1584,
+								1584
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/C++ Starting Kit/C.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 204.0,
+						"translation.y": 846.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "server.cpp",
+					"file": "stdafx.h",
 					"settings":
 					{
-						"buffer_size": 129,
+						"buffer_size": 784,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								112,
-								112
+								745,
+								745
 							]
 						],
 						"settings":
@@ -193,6 +286,33 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "client.cpp",
+					"settings":
+					{
+						"buffer_size": 1691,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1326,
+								1326
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++ Starting Kit/C.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 535.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -237,7 +357,7 @@
 	},
 	"output.exec":
 	{
-		"height": 112.0
+		"height": 259.0
 	},
 	"replace":
 	{
@@ -264,6 +384,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 212.0,
+	"side_bar_width": 207.0,
 	"status_bar_visible": true
 }
