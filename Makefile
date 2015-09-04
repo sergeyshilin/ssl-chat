@@ -15,8 +15,10 @@ LIBS 		=	-lthrift -lthriftnb -levent -lboost_system -llog4cxx -lssl -lcrypto
 PCH_NAME 	=	stdafx.h
 STDAFX 		= 	${PCH_NAME}.gch
 
-GEN_SRC		= 	gen-cpp/SSLChatService.cpp  \
-             	gen-cpp/sslchat_types.cpp
+SRC		= 	gen-cpp/SSLChatService.cpp  \
+			gen-cpp/sslchat_types.cpp \
+			src/SSLChatHandler.cpp \
+			src/IOService.cpp
 
 # OBJECTS 	= 	${SOURCES:%.cpp=%.o}
 
@@ -26,13 +28,13 @@ CFLAGS		= 	-std=c++11 -Wall
 default: server client
 
 server: ${STDAFX} server.cpp
-	${CC} ${CFLAGS} -o server ${GEN_INC} ${INCS_DIRS} server.cpp ${GEN_SRC} ${LIBS_DIRS} ${LIBS}
+	${CC} ${CFLAGS} -o server ${GEN_INC} ${INCS_DIRS} server.cpp ${SRC} ${LIBS_DIRS} ${LIBS}
 
 # src/%.o: src/%.cpp
 # 	${CC} $< ${CFLAGS} -o $@
 
 client: ${STDAFX} client.cpp
-	${CC} ${CFLAGS} -o client ${GEN_INC} ${INCS_DIRS} client.cpp ${GEN_SRC} ${LIBS_DIRS} ${LIBS}
+	${CC} ${CFLAGS} -o client ${GEN_INC} ${INCS_DIRS} client.cpp ${SRC} ${LIBS_DIRS} ${LIBS}
 
 ${STDAFX}:
 	${CC} ${CFLAGS} -x c++-header ${PCH_NAME}
