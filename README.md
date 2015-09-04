@@ -1,6 +1,8 @@
 # Thrift SSL multithread server-client chat
 This application has been compiled on my laptop 
-> Linux snape-ubuntu 3.19.0-26-generic
+```
+Linux snape-ubuntu 3.19.0-26-generic
+```
 
 ## Prepare
 To compile this application on your own you have to configure and install all the next libs:
