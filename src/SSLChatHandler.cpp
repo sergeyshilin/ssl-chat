@@ -3,6 +3,8 @@
 
 using namespace sslchat;
 using namespace std;
+using namespace log4cxx;
+using namespace log4cxx::helpers;
 
 void SSLChatHandler::debugMap() {
 	cout << "users in map:\t" << messages.size() << endl;
@@ -25,6 +27,8 @@ void SSLChatHandler::sendNotification(string name, notification type) {
 		switch(type) {
 			case JOIN:
 				server_msg.message += "joined the conversation.";
+				if(it->first.compare(name) == 0)
+					server_msg.message += "\nType \"exit\" to close chat.";
 				log_msg += "joined the conversation.";
 				break;
 			case EXIT:
@@ -38,7 +42,7 @@ void SSLChatHandler::sendNotification(string name, notification type) {
 		it->second.push(server_msg);
 	}
 
-	// LOG4CXX_INFO(logger, log_msg);
+	LOG4CXX_INFO(logger, log_msg);
 }
 
 void SSLChatHandler::getMessage(Message& _return, const std::string& name) {
@@ -74,7 +78,7 @@ void SSLChatHandler::send(const Message& msg) {
 	string name_lower = msg.name;
 	std::transform(name_lower.begin(), name_lower.end(), name_lower.begin(), ::tolower);
 
-	// LOG4CXX_INFO(logger, "Got message from " << msg.name);
+	LOG4CXX_INFO(logger, "Got message from " << msg.name);
 
 	if(msg.message.compare("exit") == 0) {
 		sendNotification(name_lower, notification::EXIT);

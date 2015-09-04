@@ -3,11 +3,14 @@
 
 using namespace sslchat;
 using namespace std;
+using namespace log4cxx;
+using namespace log4cxx::helpers;
 
 class SSLChatHandler : virtual public SSLChatServiceIf {
 private:
 	enum notification {JOIN, EXIT};
 	map< string, queue< Message > > messages;
+	LoggerPtr logger = log4cxx::Logger::getLogger("SSLChat");
 
 	/**
 	* Send to all clients that user @name joins the chat.
